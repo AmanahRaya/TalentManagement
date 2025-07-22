@@ -207,6 +207,13 @@
           <tr><td class="label">2023</td><td class="value">${staff.score2023}</td></tr>
           <tr><td class="label">2024</td><td class="value">${staff.score2024}</td></tr>
         </table>
+
+        <h2>5. Attended Trainings</h2>
+<ul style="padding-left: 20px;">
+  ${staff.trainings ? staff.trainings.split(";").map(t => `<li>${t.trim()}</li>`).join('') : "<li>None recorded</li>"}
+</ul>
+
+
       `;
       container.style.display = 'block';
       document.getElementById("printBtn").style.display = 'inline-block';
