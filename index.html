@@ -135,19 +135,18 @@
 </head>
 <body>
 
-  <div id="searchSection">
-    <h1>Staff Information Search</h1>
-    <div style="text-align:center;">
-      <input type="text" id="searchInput" placeholder="Enter Staff Name..." />
-      <button onclick="searchStaff()">Search</button>
-    </div>
-  </div>
+<div id="searchSection">
+  <h1>Staff Information Search</h1>
+  <div style="text-align:center; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+    <input type="text" id="searchInput" placeholder="Enter Staff Name..." />
+    <button onclick="searchStaff()">Search</button>
 
-    <div id="staffList" style="margin-top: 30px; text-align:center;">
-    <h2 style="font-size: 1.2em; color: #333;">📋 List of Staff</h2>
-    <ul id="nameList" style="list-style: none; padding: 0;"></ul>
+    <select id="staffDropdown" onchange="dropdownSelect()" style="padding: 12px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc;">
+      <option value="">-- Select Staff --</option>
+    </select>
   </div>
 </div>
+
 
   <div id="profileContainer" class="card"></div>
 
@@ -155,96 +154,100 @@
     <button id="printBtn" onclick="window.print()">🖨️ Print Profile</button>
   </div>
 
-  <script>
-let staffData = [];
+<script>
+  let staffData = [];
 
-fetch('staffData2.json')
-  .then(response => response.json())
-  .then(data => {
-    staffData = data;
-    renderStaffList();
-  });
+  fetch('staffData2.json')
+    .then(response => response.json())
+    .then(data => {
+      staffData = data;
+      populateDropdown();
+    });
 
-function renderStaffList() {
-  const nameList = document.getElementById("nameList");
-  nameList.innerHTML = '';
-
-  staffData.forEach((staff, index) => {
-    const li = document.createElement('li');
-    li.style.margin = "5px 0";
-    li.innerHTML = `<a href="#" onclick="showProfile('${staff.name.replace(/'/g, "\\'")}')" style="color:#007acc; text-decoration: none;">${staff.name}</a>`;
-    nameList.appendChild(li);
-  });
-}
-
-function showProfile(name) {
-  const staff = staffData.find(s => s.name.toLowerCase() === name.toLowerCase());
-  displayProfile(staff);
-}
-
-function searchStaff() {
-  const keyword = document.getElementById("searchInput").value.toLowerCase();
-  const staff = staffData.find(s => s.name.toLowerCase().includes(keyword));
-  displayProfile(staff);
-}
-
-function displayProfile(staff) {
-  const container = document.getElementById("profileContainer");
-
-  if (!staff) {
-    container.style.display = 'none';
-    document.getElementById("printBtn").style.display = 'none';
-    alert("❌ Staff not found.");
-    return;
+  function populateDropdown() {
+    const dropdown = document.getElementById("staffDropdown");
+    staffData.forEach(staff => {
+      const option = document.createElement("option");
+      option.value = staff.name;
+      option.textContent = staff.name;
+      dropdown.appendChild(option);
+    });
   }
 
-  container.innerHTML = `
-    <div class="profile-section">
-      <img src="images/${staff.photo}" alt="Staff Photo" class="profile-photo">
-      <div class="profile-details">
-        <table>
-          <tr><td class="label">Staff ID</td><td class="value">${staff.id}</td></tr>
-          <tr><td class="label">Name</td><td class="value">${staff.name}</td></tr>
-          <tr><td class="label">Age</td><td class="value">${staff.age} years</td></tr>
-          <tr><td class="label">Email</td><td class="value">${staff.email}</td></tr>
-          <tr><td class="label">Date Joined</td><td class="value">${staff.joined}</td></tr>
-        </table>
+  function dropdownSelect() {
+    const selectedName = document.getElementById("staffDropdown").value;
+    if (selectedName) showProfile(selectedName);
+  }
+
+  function searchStaff() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+    const staff = staffData.find(s => s.name.toLowerCase().includes(keyword));
+    displayProfile(staff);
+  }
+
+  function showProfile(name) {
+    const staff = staffData.find(s => s.name.toLowerCase() === name.toLowerCase());
+    displayProfile(staff);
+  }
+
+  function displayProfile(staff) {
+    const container = document.getElementById("profileContainer");
+
+    if (!staff) {
+      container.style.display = 'none';
+      document.getElementById("printBtn").style.display = 'none';
+      alert("❌ Staff not found.");
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="profile-section">
+        <img src="images/${staff.photo}" alt="Staff Photo" class="profile-photo">
+        <div class="profile-details">
+          <table>
+            <tr><td class="label">Staff ID</td><td class="value">${staff.id}</td></tr>
+            <tr><td class="label">Name</td><td class="value">${staff.name}</td></tr>
+            <tr><td class="label">Age</td><td class="value">${staff.age} years</td></tr>
+            <tr><td class="label">Email</td><td class="value">${staff.email}</td></tr>
+            <tr><td class="label">Date Joined</td><td class="value">${staff.joined}</td></tr>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <h2>2. Position & Division</h2>
-    <table>
-      <tr><td class="label">Division</td><td class="value">${staff.dept}</td></tr>
-      <tr><td class="label">Position</td><td class="value">${staff.position}</td></tr>
-      <tr><td class="label">Grade</td><td class="value">${staff.grade}</td></tr>
-      <tr><td class="label">Level</td><td class="value">${staff.level}</td></tr>
-      <tr><td class="label">Last Promotion</td><td class="value">${staff.promotion}</td></tr>
-    </table>
+      <h2>2. Position & Division</h2>
+      <table>
+        <tr><td class="label">Division</td><td class="value">${staff.dept}</td></tr>
+        <tr><td class="label">Position</td><td class="value">${staff.position}</td></tr>
+        <tr><td class="label">Grade</td><td class="value">${staff.grade}</td></tr>
+        <tr><td class="label">Level</td><td class="value">${staff.level}</td></tr>
+        <tr><td class="label">Last Promotion</td><td class="value">${staff.promotion}</td></tr>
+      </table>
 
-    <h2>3. Education</h2>
-    <table>
-      <tr><td class="label">Course</td><td class="value">${staff.course}</td></tr>
-      <tr><td class="label">Institution</td><td class="value">${staff.university}</td></tr>
-      <tr><td class="label">Qualification</td><td class="value">${staff.education}</td></tr>
-    </table>
+      <h2>3. Education</h2>
+      <table>
+        <tr><td class="label">Course</td><td class="value">${staff.course}</td></tr>
+        <tr><td class="label">Institution</td><td class="value">${staff.university}</td></tr>
+        <tr><td class="label">Qualification</td><td class="value">${staff.education}</td></tr>
+      </table>
 
-    <h2>4. Performance Appraisal</h2>
-    <table>
-      <tr><td class="label">2022</td><td class="value">${staff.score2022}</td></tr>
-      <tr><td class="label">2023</td><td class="value">${staff.score2023}</td></tr>
-      <tr><td class="label">2024</td><td class="value">${staff.score2024}</td></tr>
-    </table>
+      <h2>4. Performance Appraisal</h2>
+      <table>
+        <tr><td class="label">2022</td><td class="value">${staff.score2022}</td></tr>
+        <tr><td class="label">2023</td><td class="value">${staff.score2023}</td></tr>
+        <tr><td class="label">2024</td><td class="value">${staff.score2024}</td></tr>
+      </table>
 
-    <h2>5. Attended Trainings</h2>
-    <ul style="padding-left: 20px;">
-      ${staff.trainings ? staff.trainings.split(";").map(t => `<li>${t.trim()}</li>`).join('') : "<li>None recorded</li>"}
-    </ul>
-  `;
+      <h2>5. Attended Trainings</h2>
+      <ul style="padding-left: 20px;">
+        ${staff.trainings ? staff.trainings.split(";").map(t => `<li>${t.trim()}</li>`).join('') : "<li>None recorded</li>"}
+      </ul>
+    `;
 
-  container.style.display = 'block';
-  document.getElementById("printBtn").style.display = 'inline-block';
-}
-  </script>
+    container.style.display = 'block';
+    document.getElementById("printBtn").style.display = 'inline-block';
+  }
+</script>
+
 
 </body>
 </html>
