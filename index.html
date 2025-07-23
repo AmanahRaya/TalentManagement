@@ -243,7 +243,7 @@
         <tr><td class="label">2024</td><td class="value">${staff.score2024}</td></tr>
       </table>
 
-      <h2>5. Attended Trainings</h2>
+      <h2>5. List of Training</h2>
       <ul style="padding-left: 20px;">
         ${staff.trainings ? staff.trainings.split(";").map(t => `<li>${t.trim()}</li>`).join('') : "<li>None recorded</li>"}
       </ul>
