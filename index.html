@@ -4,140 +4,128 @@
   <meta charset="UTF-8" />
   <title>Amanah Raya Staff Information</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Segoe+UI&display=swap" rel="stylesheet">
-  <style>
+<style>
+  body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background: linear-gradient(to bottom right, #dbe9f4, #f5faff);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #007acc55 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float1 6s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #00336644 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float2 8s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  @keyframes float1 {
+    from { transform: translateY(0px) rotate(0deg); }
+    to { transform: translateY(20px) rotate(10deg); }
+  }
+
+  @keyframes float2 {
+    from { transform: translateY(0px) rotate(0deg); }
+    to { transform: translateY(-15px) rotate(-5deg); }
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2em;
+    background: linear-gradient(to right, #003366, #007acc);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+  }
+
+  input[type="text"],
+  select {
+    padding: 12px;
+    width: 70%;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    background: white;
+  }
+
+  button {
+    padding: 12px 20px;
+    background: #007acc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #005b99;
+  }
+
+  .card {
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 25px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-in;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Keep rest of your styles as-is... */
+
+  @media print {
     body {
-      font-family: 'Segoe UI', 'Roboto', sans-serif;
-      max-width: 900px;
-      margin: auto;
-      padding: 30px;
-      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background: white !important;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2em;
-      background: linear-gradient(to right, #003366, #007acc);
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+    body::before,
+    body::after {
+      display: none !important;
     }
 
-    input[type="text"] {
-      padding: 12px;
-      width: 70%;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-right: 10px;
-    }
-
-    button {
-      padding: 12px 20px;
-      background: #007acc;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #005b99;
+    #searchSection, #printBtn {
+      display: none !important;
     }
 
     .card {
-      background: white;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
-      padding: 25px;
-      border-radius: 10px;
-      animation: fadeIn 0.5s ease-in;
+      box-shadow: none;
+      border: none;
     }
+  }
+</style>
 
-    .profile-section {
-      display: flex;
-      margin-bottom: 20px;
-      gap: 20px;
-    }
-
-    .profile-photo {
-      width: 130px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid #bbb;
-    }
-
-    .profile-details table,
-    .card table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-
-    td {
-      padding: 8px;
-      vertical-align: top;
-    }
-
-    .label {
-      width: 35%;
-      font-weight: bold;
-      background: #f1f1f1;
-    }
-
-    .value {
-      width: 65%;
-      border-bottom: 1px dashed #ccc;
-      white-space: normal;
-      overflow: visible;
-      text-overflow: unset;
-      max-width: 100%;
-      display: inline-block;
-
-    }
-
-    h2 {
-      font-size: 1.3em;
-      color: #003366;
-      margin-top: 30px;
-      border-bottom: 2px solid #007acc;
-      padding-bottom: 5px;
-    }
-
-    #profileContainer {
-      display: none;
-    }
-
-    #printBtn {
-      display: none;
-      margin-top: 20px;
-      background: #28a745;
-    }
-
-    @media print {
-      body {
-        margin: 0;
-        padding: 0;
-        background: white;
-      }
-
-      #searchSection, #printBtn {
-        display: none;
-      }
-
-      .card {
-        box-shadow: none;
-        border: none;
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
 </head>
 <body>
 
