@@ -55,48 +55,44 @@
       animation: fadeIn 0.5s ease-in;
     }
 
-    .profile-section {
-      display: flex;
-      margin-bottom: 20px;
-      gap: 20px;
-    }
+.profile-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 25px;
+}
 
-    .profile-photo {
-      width: 130px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid #bbb;
-    }
+.photo-container {
+  flex-shrink: 0;
+}
 
-    .profile-details table,
-    .card table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
+.profile-photo {
+  width: 140px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
 
-    td {
-      padding: 8px;
-      vertical-align: top;
-    }
+.profile-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-    .label {
-      width: 35%;
-      font-weight: bold;
-      background: #f1f1f1;
-    }
+.profile-details .label {
+  width: 120px;
+  font-weight: bold;
+  background: #f1f1f1;
+  vertical-align: top;
+  padding: 6px;
+}
 
-    .value {
-      width: 65%;
-      border-bottom: 1px dashed #ccc;
-      white-space: normal;
-      overflow: visible;
-      text-overflow: unset;
-      max-width: 100%;
-      display: inline-block;
+.profile-details .value {
+  padding: 6px;
+  border-bottom: 1px dashed #ccc;
+  vertical-align: top;
+}
 
-    }
 
     h2 {
       font-size: 1.3em;
@@ -138,43 +134,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .profile-section {
-  display: flex;
-  align-items: flex-start;
-  gap: 25px;
-  margin-bottom: 25px;
-}
-
-.photo-container {
-  flex-shrink: 0;
-}
-
-.profile-photo {
-  width: 140px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.profile-details table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.profile-details .label {
-  width: 120px;
-  font-weight: bold;
-  background: #f1f1f1;
-  vertical-align: top;
-  padding: 6px;
-}
-
-.profile-details .value {
-  padding: 6px;
-  border-bottom: 1px dashed #ccc;
-  vertical-align: top;
-}
+    
   </style>
 </head>
 <body>
