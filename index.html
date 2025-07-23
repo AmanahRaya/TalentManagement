@@ -135,19 +135,22 @@
 </head>
 <body>
 
-  <div id="searchSection">
-    <h1>Staff Information Search</h1>
-    <div style="text-align:center;">
-      <input type="text" id="searchInput" placeholder="Enter Staff Name..." />
-      <button onclick="searchStaff()">Search</button>
-    </div>
+<h1>Staff Information Dashboard</h1>
+
+<div class="main-container">
+  <div class="left-list">
+    <input type="text" id="searchInput" placeholder="Search Staff..." oninput="filterList()" />
+    <ul id="nameList"></ul>
   </div>
 
-    <div id="staffList" style="margin-top: 30px; text-align:center;">
-    <h2 style="font-size: 1.2em; color: #333;">📋 List of Staff</h2>
-    <ul id="nameList" style="list-style: none; padding: 0;"></ul>
+  <div class="right-profile">
+    <div id="profileContainer" class="card"></div>
+    <div style="text-align: center;">
+      <button id="printBtn" onclick="window.print()">🖨️ Print Profile</button>
+    </div>
   </div>
 </div>
+
 
   <div id="profileContainer" class="card"></div>
 
