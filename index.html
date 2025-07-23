@@ -137,6 +137,44 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .profile-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.photo-container {
+  flex-shrink: 0;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.profile-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile-details .label {
+  width: 120px;
+  font-weight: bold;
+  background: #f1f1f1;
+  vertical-align: top;
+  padding: 6px;
+}
+
+.profile-details .value {
+  padding: 6px;
+  border-bottom: 1px dashed #ccc;
+  vertical-align: top;
+}
   </style>
 </head>
 <body>
@@ -207,18 +245,21 @@
     }
 
     container.innerHTML = `
-      <div class="profile-section">
-        <img src="images/${staff.photo}" alt="Staff Photo" class="profile-photo">
-        <div class="profile-details">
-          <table>
-            <tr><td class="label">Staff ID</td><td class="value">${staff.id}</td></tr>
-            <tr><td class="label">Name</td><td class="value">${staff.name}</td></tr>
-            <tr><td class="label">Age</td><td class="value">${staff.age} years</td></tr>
-            <tr><td class="label">Email</td><td class="value">${staff.email}</td></tr>
-            <tr><td class="label">Date Joined</td><td class="value">${staff.joined}</td></tr>
-          </table>
-        </div>
-      </div>
+<div class="profile-section">
+  <div class="photo-container">
+    <img src="images/${staff.photo}" alt="Staff Photo" class="profile-photo">
+  </div>
+  <div class="profile-details">
+    <table>
+      <tr><td class="label">Staff ID</td><td class="value">${staff.id}</td></tr>
+      <tr><td class="label">Name</td><td class="value">${staff.name}</td></tr>
+      <tr><td class="label">Age</td><td class="value">${staff.age} years</td></tr>
+      <tr><td class="label">Email</td><td class="value">${staff.email}</td></tr>
+      <tr><td class="label">Date Joined</td><td class="value">${staff.joined}</td></tr>
+    </table>
+  </div>
+</div>
+
 
       <h2>2. Position & Division</h2>
       <table>
